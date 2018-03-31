@@ -50,9 +50,9 @@ describe('ValidatorTests', () => {
                                 .NotNull(m => m.CreditCards, "Should not be null", "CreditCard.Null")
                                 .NotNull(m => m.Super, "Should not be null", "Super.Null")
                                 .If(m => m.Super != null, validator => validator
-                                    .NotEmpty(m => m.Super.Name, "Should not be empty", "Super.Code.Empty")
-                                    .Matches(m => m.Super.Code, "^[a-zA-Z]{2}\\d{4}$", "Should not be invalid", "Super.Code.Invalid")
-                                .Exec())
+                                                                                .NotEmpty(m => m.Super.Name, "Should not be empty", "Super.Code.Empty")
+                                                                                .Matches(m => m.Super.Code, "^[a-zA-Z]{2}\\d{4}$", "Should not be invalid", "Super.Code.Invalid")
+                                                                      .Exec())
                                 .If(m => m.CreditCards != null && m.CreditCards.length > 0, 
                                             validator => validator
                                                                 .ForEach(m => m.CreditCards, validator => 
