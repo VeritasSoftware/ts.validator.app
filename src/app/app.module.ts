@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component';
 import { DetailsComponent } from './components/details/details.component';
 
@@ -15,6 +16,7 @@ import { ValidationService } from './services/validation-service';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     LoginComponent,
     DetailsComponent
   ],
