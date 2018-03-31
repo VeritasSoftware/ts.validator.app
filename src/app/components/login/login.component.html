@@ -4,18 +4,13 @@
   </div>
   <div class="panel-body">
     <form>
-      <!-- <div class="form-group">
-          <ul *ngFor="let error of validationResult.Errors" style="width:75%;text-align:center;">
-              <li class="validation-error">{{error.Message}}</li>
-          </ul>
-      </div> -->
       <table style="width:100%">        
         <tr>
           <td>
               <div class="form-group">
-                  <label class="col-md-4">Id</label>
+                  <label class="col-md-4">Id</label>                  
                   <ng-template #tipContent><div class="tooltip-inner" *ngFor="let error of validationResult.IdentifierStartsWith('Id')">{{error.Message}}</div></ng-template>
-                  <input type="text" class="form-control" name="Id" [ngModel]="loginUser.Id" [ngbTooltip]="tipContent" #t="ngbTooltip" placeholder="Id" />                  
+                  <input type="text" id="Id" class="form-control" name="Id" [(ngModel)]="loginUser.Id" (ngModelChange)="validate($event)" [ngbTooltip]="tipContent" #t="ngbTooltip" placeholder="Id" />                  
               </div>
           </td>
         </tr>
@@ -24,7 +19,7 @@
               <div class="form-group">
                   <label class="col-md-4">Password</label>
                   <ng-template #tipContent1><div class="tooltip-inner" *ngFor="let error of validationResult.IdentifierStartsWith('Pwd')" >{{error.Message}}</div></ng-template>
-                  <input type="text" class="form-control" name="Pwd" [ngModel]="loginUser.Pwd" [ngbTooltip]="tipContent1" #t1="ngbTooltip" placeholder="Password" />                                    
+                  <input type="text" id="Pwd" class="form-control" name="Pwd" [(ngModel)]="loginUser.Pwd" (ngModelChange)="validate($event)" [ngbTooltip]="tipContent1" #t1="ngbTooltip" placeholder="Password" />                                    
               </div>
           </td>
         </tr>
