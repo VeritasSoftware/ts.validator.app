@@ -6,6 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
+import { DetailsComponent } from './components/details/details.component';
 
 import { appRoutes } from './routerConfig';
 
@@ -14,12 +15,12 @@ import { ValidationService } from './services/validation-service';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),    
   ],
