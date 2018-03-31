@@ -9,6 +9,9 @@ import { ValidationService } from '../../services/validation-service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  },
   providers: [NgbTooltipConfig, ValidationService] 
 })
 export class LoginComponent implements OnInit {
@@ -28,6 +31,13 @@ validationResult: ValidationResult;
 
   ngOnInit() {     
     this.loginUser = new User("", "");
+  }
+
+  onResize(event){
+    this.validationResult = this.validationService.validateUser(this.loginUser);    
+
+    this.showValidationTooltip("Id", this.tooltip);
+    this.showValidationTooltip("Pwd", this.tooltip1); 
   }
 
   validate(e) {
