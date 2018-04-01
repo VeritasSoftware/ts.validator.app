@@ -19,7 +19,7 @@
               <div class="form-group">
                   <label class="col-md-4">Password</label>
                   <ng-template #tipContent1><div class="tooltip-inner" *ngFor="let error of validationResult.IdentifierStartsWith('Pwd')" >{{error.Message}}</div></ng-template>
-                  <input type="text" id="Pwd" class="form-control" name="Pwd" [(ngModel)]="loginUser.Pwd" (ngModelChange)="!validateMe('Pwd') ? t.open() : t.close()" [ngbTooltip]="tipContent1" #t1="ngbTooltip" placeholder="Password" />                                    
+                  <input type="text" id="Pwd" class="form-control" name="Pwd" [(ngModel)]="loginUser.Pwd" (ngModelChange)="!validateMe('Pwd') ? t1.open() : t1.close()" [ngbTooltip]="tipContent1" #t1="ngbTooltip" placeholder="Password" />                                    
               </div>
           </td>
         </tr>
