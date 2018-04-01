@@ -7,6 +7,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { DetailsComponent } from './components/details/details.component';
 
 import { appRoutes } from './routerConfig';
@@ -18,6 +19,7 @@ import { ValidationService } from './services/validation-service';
     AppComponent,
     HomeComponent,
     LoginComponent,
+    RegisterComponent,
     DetailsComponent
   ],
   imports: [

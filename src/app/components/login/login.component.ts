@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { Form } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+//import { Form } from '@angular/forms';
 import { Validator, ValidationError, ValidationResult } from '../../core/validate/validator'
 import {NgbTooltip, NgbTooltipConfig} from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../../models/models.component'
@@ -46,13 +46,16 @@ validationResult: ValidationResult;
   validateForm() {
     this.validationResult = this.validationService.validateUser(this.loginUser);
 
-    this.showValidationTooltip(this.tooltipId);
-    this.showValidationTooltip(this.tooltipPwd); 
+    this.showValidationTooltip("Id", this.tooltipId);
+    this.showValidationTooltip("Pwd", this.tooltipPwd); 
   }
 
-  public showValidationTooltip(tooltip: NgbTooltip): void {    
+  showValidationTooltip(error: string, tooltip: NgbTooltip): void {    
     tooltip.close();
-    setTimeout(()=> tooltip.open());    
+    var errors = this.validationResult.IdentifierStartsWith(error);
+    if (errors != null && errors.length > 0) {
+      setTimeout(()=> tooltip.open());    
+    }    
   }  
 
   login() {
