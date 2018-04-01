@@ -21,8 +21,8 @@ Pwd: string;
 title: string = "Login"
 validationResult: ValidationResult;
 
-   @ViewChild('t') public tooltip: NgbTooltip;
-   @ViewChild('t1') public tooltip1: NgbTooltip;
+   @ViewChild('t') public tooltipId: NgbTooltip;
+   @ViewChild('t1') public tooltipPwd: NgbTooltip;
 
   constructor(config: NgbTooltipConfig, private validationService: ValidationService) {
     config.placement = 'top';
@@ -34,17 +34,14 @@ validationResult: ValidationResult;
   }
 
   onResize(event){
-    this.validationResult = this.validationService.validateUser(this.loginUser);    
-
-    this.showValidationTooltip("Id", this.tooltip);
-    this.showValidationTooltip("Pwd", this.tooltip1); 
+    this.validate();
   }
 
-  validate(e) {
+  validate() {
     this.validationResult = this.validationService.validateUser(this.loginUser);    
 
-    this.showValidationTooltip("Id", this.tooltip);
-    this.showValidationTooltip("Pwd", this.tooltip1); 
+    this.showValidationTooltip("Id", this.tooltipId);
+    this.showValidationTooltip("Pwd", this.tooltipPwd); 
   }
 
   public showValidationTooltip(name: string, tooltip: NgbTooltip): void {    
@@ -57,10 +54,7 @@ validationResult: ValidationResult;
   }  
 
   login() {
-     this.validationResult = this.validationService.validateUser(this.loginUser);    
-
-    this.showValidationTooltip("Id", this.tooltip);
-    this.showValidationTooltip("Pwd", this.tooltip1);                            
+     this.validate();                            
   }
 
 }
