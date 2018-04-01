@@ -9,6 +9,9 @@ import { ValidationService } from '../../services/validation-service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  host: {
+    '(window:resize)': 'onResize($event)'
+  },
   providers: [NgbTooltipConfig, ValidationService]
 })
 export class RegisterComponent implements OnInit {
@@ -30,6 +33,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.registerUser = new RegisterUser("", "", "", "", "");
+  }
+
+  onResize(event){
+    this.validateForm();
   }
 
   showValidationTooltip(error: string, tooltip: NgbTooltip): void {    
