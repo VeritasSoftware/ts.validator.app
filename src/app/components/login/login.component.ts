@@ -34,27 +34,29 @@ validationResult: ValidationResult;
   }
 
   onResize(event){
-    this.validate();
+    this.validateForm();
   }
 
-  validate() {
+  validateMe(p: string) {
     this.validationResult = this.validationService.validateUser(this.loginUser);    
-
-    this.showValidationTooltip("Id", this.tooltipId);
-    this.showValidationTooltip("Pwd", this.tooltipPwd); 
+    var errors = this.validationResult.IdentifierStartsWith(p);
+    return !(errors != null && errors.length > 0);     
   }
 
-  public showValidationTooltip(name: string, tooltip: NgbTooltip): void {    
+  validateForm() {
+    this.validationResult = this.validationService.validateUser(this.loginUser);
+
+    this.showValidationTooltip(this.tooltipId);
+    this.showValidationTooltip(this.tooltipPwd); 
+  }
+
+  public showValidationTooltip(tooltip: NgbTooltip): void {    
     tooltip.close();
-    var error = this.validationResult.Identifier(name);
-    if (error != null){
-      var msg = error.Message;            
-      setTimeout(()=> tooltip.open(msg));
-    }        
+    setTimeout(()=> tooltip.open());    
   }  
 
   login() {
-     this.validate();                            
+     this.validateForm();                            
   }
 
 }
