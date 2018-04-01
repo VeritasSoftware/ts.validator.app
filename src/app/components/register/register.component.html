@@ -33,7 +33,7 @@
               <td>
                   <div class="form-group">                
                       <ng-template #tipContent3><div class="tooltip-inner" *ngFor="let error of validationResult.IdentifierStartsWith('Password')">{{error.Message}}</div></ng-template>
-                      <input type="text" id="Password" class="form-control" name="Password" [(ngModel)]="registerUser.Password" (ngModelChange)="!validateMe('Password') ? t3.open() : t3.close()" [ngbTooltip]="tipContent3" #t3="ngbTooltip" placeholder="Password" />                  
+                      <input type="password" id="Password" class="form-control" name="Password" [(ngModel)]="registerUser.Password" (ngModelChange)="!validateMe('Password') ? t3.open() : t3.close()" [ngbTooltip]="tipContent3" #t3="ngbTooltip" placeholder="Password" />                  
                   </div>
               </td>
           </tr>
@@ -41,7 +41,7 @@
               <td>
                   <div class="form-group">                
                       <ng-template #tipContent4><div class="tooltip-inner" *ngFor="let error of validationResult.IdentifierStartsWith('ConfirmPassword')">{{error.Message}}</div></ng-template>
-                      <input type="text" id="ConfirmPassword" class="form-control" name="ConfirmPassword" [(ngModel)]="registerUser.ConfirmPassword" (ngModelChange)="!validateMe('ConfirmPassword') ? t4.open() : t4.close()" [ngbTooltip]="tipContent4" #t4="ngbTooltip" placeholder="Confirm Password" />                  
+                      <input type="password" id="ConfirmPassword" class="form-control" name="ConfirmPassword" [(ngModel)]="registerUser.ConfirmPassword" (ngModelChange)="!validateMe('ConfirmPassword') ? t4.open() : t4.close()" [ngbTooltip]="tipContent4" #t4="ngbTooltip" placeholder="Confirm Password" />                  
                   </div>
               </td>
           </tr>
