@@ -1,10 +1,27 @@
 <div style="text-align:center;">
-    <nav>
-        <a routerLink="/home">Home</a>
-        <a routerLink="/login">Login</a>
-        <a routerLink="/register">Register</a>
-        <a routerLink="/details" >Details</a>      
-    </nav>     
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header" style="width: 100%;">
+                    <table style="width: 100%;">
+                            <tr>
+                                <td>
+                                    <h1 style="text-align:center">
+                                        Welcome to ts.validator!!
+                                    </h1>
+                                </td>
+                                <td>
+                                    <ul class="nav navbar-nav">
+                                    <li><a routerLink="/home">Home</a></li>
+                                    <li><a routerLink="/login">Login</a></li>
+                                    <li><a routerLink="/register">Register</a></li>
+                                    <li><a routerLink="/details" >Details</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                    </table>                  
+            </div>            
+        </div>
+    </nav>    
 </div>
 <div class="container">
     <router-outlet></router-outlet>
