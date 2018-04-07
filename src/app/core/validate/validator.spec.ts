@@ -6,6 +6,7 @@ class Employee {
     Name: string;
     CreditCards: CreditCard[];
     Super: Super;
+    Email: string;
  }
  
  class CreditCard {
@@ -45,14 +46,20 @@ describe('ValidatorTests', () => {
     model.Super.Name = "XYZ Super Fund";
     model.Super.Code = "XY1234";
 
+    model.Email = "john.doe@xyx.com";
+
     var validationResult = new Validator(model)                              
                                 .NotEmpty(m => m.Name, "Should not be empty", "Employee.Name.Empty")
                                 .NotNull(m => m.CreditCards, "Should not be null", "CreditCard.Null")
                                 .NotNull(m => m.Super, "Should not be null", "Super.Null")
+                                .NotEmpty(m => m.Email, "Should not be empty", "Employee.Email.Empty")
                                 .If(m => m.Super != null, validator => validator
                                                                                 .NotEmpty(m => m.Super.Name, "Should not be empty", "Super.Code.Empty")
                                                                                 .Matches(m => m.Super.Code, "^[a-zA-Z]{2}\\d{4}$", "Should not be invalid", "Super.Code.Invalid")
                                                                       .Exec())
+                                .If(m => m.Email != '', validator => 
+                                                                    validator.Email(m => m.Email, "Should not be invalid", "Employee.Email.Invalid")
+                                                        .Exec())
                                 .Required(m => m.CreditCards, (m, creditCards) => creditCards.length > 0, "Must have atleast 1 credit card", "CreditCard.Required")
                                 .If(m => m.CreditCards != null && m.CreditCards.length > 0, 
                                             validator => validator
