@@ -11,7 +11,7 @@ export class ValidationService implements IValidationService {
                     .NotEmpty(m => m.Id, "Id cannot be empty")
                     .NotEmpty(m => m.Pwd, "Pwd cannot be empty")                                                         
                 .Exec();
-    }               
+    }                           
 
     validateRegisterUser(model: RegisterUser) : ValidationResult {
         return new Validator(model)
@@ -21,6 +21,10 @@ export class ValidationService implements IValidationService {
                                                                 validator.CreditCard(m => +m.CreditCardNo, "Credit Card Number is invalid", "CreditCardNo.Invalid")
                                                     .Exec())
                     .NotEmpty(m => m.Id, "Id cannot be empty")
+                    .NotEmpty(m => m.Email, "Email cannot be empty")
+                    .If(m => m.Email != "", validator =>
+                                                        validator.Email(m => m.Email, "Email is invalid", "Email")
+                                            .Exec())
                     .NotEmpty(m => m.Password, "Pwd cannot be empty")
                     .NotEmpty(m => m.ConfirmPassword, "Confirm Pwd cannot be empty") 
                     .If(m => m.Password != "", validator => 

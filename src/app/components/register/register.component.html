@@ -30,6 +30,14 @@
               </td>
           </tr>
           <tr>
+                <td>
+                    <div class="form-group">                
+                        <ng-template #tipContent5><div class="tooltip-inner" *ngFor="let error of validationResult.IdentifierStartsWith('Email')">{{error.Message}}</div></ng-template>
+                        <input type="text" id="Email" class="form-control" name="Email" [(ngModel)]="registerUser.Email" (ngModelChange)="!validateMe('Id') ? t5.open() : t5.close()" [ngbTooltip]="tipContent5" #t5="ngbTooltip" placeholder="Email" />                  
+                    </div>
+                </td>
+            </tr>
+          <tr>
               <td>
                   <div class="form-group">                
                       <ng-template #tipContent3><div class="tooltip-inner" *ngFor="let error of validationResult.IdentifierStartsWith('Password')">{{error.Message}}</div></ng-template>

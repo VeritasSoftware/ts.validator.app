@@ -24,6 +24,7 @@ export class RegisterComponent implements OnInit {
    @ViewChild('t2') public tooltipId: NgbTooltip;
    @ViewChild('t3') public tooltipPwd: NgbTooltip;
    @ViewChild('t4') public tooltipConfirmPwd: NgbTooltip;
+   @ViewChild('t5') public tooltipEmail: NgbTooltip;
 
 
   constructor(config: NgbTooltipConfig, private validationService: ValidationService) { 
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registerUser = new RegisterUser("", "", "", "", "");
+    this.registerUser = new RegisterUser("", "", "", "", "", "");
   }
 
   onResize(event){
@@ -61,6 +62,7 @@ export class RegisterComponent implements OnInit {
     this.showValidationTooltip("Id", this.tooltipId);
     this.showValidationTooltip("Password", this.tooltipPwd); 
     this.showValidationTooltip("ConfirmPassword", this.tooltipConfirmPwd); 
+    this.showValidationTooltip("Email", this.tooltipEmail); 
   }
 
   register() {
