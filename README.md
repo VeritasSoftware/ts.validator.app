@@ -12,6 +12,12 @@ Initial       | After validation
 *   This service can be injected into any component. 
 
  ```typescript
+    import {Injectable} from '@angular/core'
+
+    import { IValidationService } from './ivalidation-service'
+    import { User, RegisterUser } from '../models/models.component'
+    import { Validator, ValidationResult } from '../core/validate';
+
     @Injectable()
     export class ValidationService implements IValidationService {
         validateUser(model: User) : ValidationResult {
