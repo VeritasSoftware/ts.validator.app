@@ -2,7 +2,7 @@
 
 # Angular 5 CLI app demoes the ts.validator TypeScript based generic validation framework.
 
-* [ts.validator framework on GitHub](https://github.com/VeritasSoftware/ts.validator)
+[**ts.validator framework on GitHub**](https://github.com/VeritasSoftware/ts.validator)
 
 Initial       | After validation
 ------------- | ----------------
