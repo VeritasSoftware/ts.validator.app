@@ -4,6 +4,8 @@
 
 [**ts.validator framework on GitHub**](https://github.com/VeritasSoftware/ts.validator)
 
+[**Article on framework**](https://www.c-sharpcorner.com/article/ts-validator-typescript-based-generic-validation-framework/)
+
 Initial       | After validation
 ------------- | ----------------
 ![Login initial](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_1.jpg)|![Login validation](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_2.jpg)
