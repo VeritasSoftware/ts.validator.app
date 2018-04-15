@@ -51,3 +51,13 @@ Initial       | After validation
         }
     }
 ```
+
+**In the above code snippet:**
+
+*   There is a Validation Service in the Angular 5 CLI app.
+*   All business rules around model validation are centralized in this service.
+*   There are 2 models for the **components** **Login** and **Register**. These **models** are **User** and **RegisterUser**.
+*   The Validation Service creates 2 methods to validate these models. These **methods** are **validateUser** and **validateRegisterUser**.
+*   In these methods, the framework class **Validator** is used to lay the validation rules for the models.
+*   This service is injected into the components.
+*   The methods of the service are used for model validation.
