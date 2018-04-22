@@ -18,7 +18,7 @@ export class ValidationService implements IValidationService {
                                                                                                         var userId = id;
                                                                                                         var pwd = m.Pwd;                                                    
                                                                                                         //Some long running validation task
-                                                                                                        //Eg. id, pwd match in the database.  
+                                                                                                        //Eg. an api call to match id, pwd in the database.
                                                                                                         //You will return true or false from this must func
                                                                                                         return false;
                                                                                                     }, 
@@ -30,7 +30,7 @@ export class ValidationService implements IValidationService {
                                                                                 required: (m, id) => {
                                                                                                         var userId = id;                                                    
                                                                                                         //Some long running validation task
-                                                                                                        //Eg. user with id already logged in.  
+                                                                                                        //Eg. another api call to check if user with id already logged in.  
                                                                                                         //You will return true or false from this must func
                                                                                                         return true;
                                                                                                     }, 
