@@ -34,7 +34,7 @@ export class ValidationService implements IValidationService {
                                                                                                         //You will return true or false from this must func
                                                                                                         return true;
                                                                                                     }, 
-                                                                                message: "You ", 
+                                                                                message: "You are already logged in", 
                                                                                 errorIdentifier: "Pwd.AlreadyLoggedIn" 
                                                                             } 
                                                                         ])
