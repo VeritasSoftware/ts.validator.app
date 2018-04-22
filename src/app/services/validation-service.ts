@@ -30,7 +30,7 @@ export class ValidationService implements IValidationService {
                                                                                 required: (m, id) => {
                                                                                                         var userId = id;                                                    
                                                                                                         //Some long running validation task
-                                                                                                        //Eg. another api call to check if user with id already logged in.  
+                                                                                                        //Eg. another api call to check if user with id not already logged in.  
                                                                                                         //You will return true or false from this must func
                                                                                                         return true;
                                                                                                     }, 
