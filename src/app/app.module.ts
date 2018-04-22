@@ -29,6 +29,6 @@ import { ValidationService } from './services/validation-service';
     NgbModule.forRoot(),    
   ],
   providers: [ValidationService],
-  bootstrap: [AppComponent, HomeComponent, LoginComponent, DetailsComponent]
+  bootstrap: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, DetailsComponent]
 })
 export class AppModule { }

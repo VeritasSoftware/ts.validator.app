@@ -8,7 +8,12 @@
 
 Initial       | After validation
 ------------- | ----------------
-![Login initial](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_1.jpg)|![Login validation](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_2.jpg)
+![Login initial](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_1.jpg)|
+1             | 2 
+------------- | ---------------
+![Login validation](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_2.jpg)|
+![Login validation](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_3.jpg)
+
 
 *   The business rules around model validation remain centralized in the validation service.
 *   This service can be injected into any component. 
