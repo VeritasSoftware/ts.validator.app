@@ -11,6 +11,7 @@ class Employee {
  
  class CreditCard {
    Number: number;
+   Name: string;
  }
  
  class Super {
@@ -37,8 +38,10 @@ describe('ValidatorTests', () => {
     model.CreditCards = new Array<CreditCard>();
     var masterCard = new CreditCard();
     masterCard.Number = 5105105105105100;
+    masterCard.Name = "John Doe"
     var amexCard = new CreditCard();
     amexCard.Number = 371449635398431;
+    amexCard.Name = "John Doe"
     model.CreditCards.push(masterCard);
     model.CreditCards.push(amexCard);
 
@@ -64,8 +67,32 @@ describe('ValidatorTests', () => {
                                 .If(m => m.CreditCards != null && m.CreditCards.length > 0, 
                                             validator => validator
                                                                 .ForEach(m => m.CreditCards, validator => 
-                                                                                                    validator.CreditCard(m => m.Number, "Should not be invalid", "CreditCard.Number.Invalid")
-                                                                                            .Exec())
+                                                                                validator.CreditCard(m => m.Number, "Should not be invalid", "CreditCard.Number.Invalid")
+                                                                                         .RequiredAsync([
+                                                                                            {
+                                                                                              predicate: m => m.Number,
+                                                                                              required: (m, ccNo) => {
+                                                                                                //Some long running task to validate 
+                                                                                                //that the credit card no exists.
+                                                                                                //return true or false.
+                                                                                                return true;
+                                                                                              },
+                                                                                              message: "The credit card number does not exist",
+                                                                                              errorIdentifier: "CreditCard.Number.DoesNotExist"
+                                                                                            },
+                                                                                            {
+                                                                                              predicate: m => m.Name,
+                                                                                              required: (m, ccName) => {
+                                                                                                //Some long running task to validate 
+                                                                                                //that the credit card name does not exist in our database.
+                                                                                                //return true or false.
+                                                                                                return true;
+                                                                                              },
+                                                                                              message: "The credit card name exists in our database.",
+                                                                                              errorIdentifier: "CreditCard.Number.AlreadyExists"
+                                                                                            }
+                                                                                          ])
+                                                                              .Exec())
                                                         .Exec())                                                            
                             .Exec(); 
     

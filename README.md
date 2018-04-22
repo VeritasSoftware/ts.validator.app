@@ -40,6 +40,18 @@ export class ValidationService implements IValidationService {
                                                                                                     }, 
                                                                                 message: "Id and/or Password do not match our records", 
                                                                                 errorIdentifier: "Pwd.LoginFailed" 
+                                                                            },
+                                                                            { 
+                                                                                predicate: m => m.Id, 
+                                                                                required: (m, id) => {
+                                                                                                        var userId = id;                                                    
+                                                                                                        //Some long running validation task
+                                                                                                        //Eg. user with id already logged in.  
+                                                                                                        //You will return true or false from this must func
+                                                                                                        return true;
+                                                                                                    }, 
+                                                                                message: "You ", 
+                                                                                errorIdentifier: "Pwd.AlreadyLoggedIn" 
                                                                             } 
                                                                         ])
                                     .Exec()
@@ -77,6 +89,6 @@ export class ValidationService implements IValidationService {
 *   There are 2 models for the **components** **Login** and **Register**. These **models** are **User** and **RegisterUser**.
 *   The Validation Service creates 2 methods to validate these models. These **methods** are **validateUser** and **validateRegisterUser**.
 *   In these methods, the framework class **Validator** is used to lay the validation rules for the models.
-*   The **RequiredAsync** rule allows for a array of **long running validation tasks** to be processed in parallel.
+*   The **RequiredAsync** rule allows for an array of **long running validation tasks** to be processed in parallel.
 *   This service is injected into the components.
 *   The methods of the service are used for model validation.
