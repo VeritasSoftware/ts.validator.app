@@ -1,4 +1,4 @@
-import { IValidator, IValidationError, IValidationResult, Action, Func, Func2, IRequiredAsync } from './ivalidator';
+import { IValidator, IValidationError, IValidationResult, Action, Func, Func2 } from './ivalidator';
 import { TypeFactory } from './type-factory';
 import { ValidationResult, ValidationError } from './validation-result';
 
