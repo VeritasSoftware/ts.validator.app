@@ -124,28 +124,6 @@ export class Validator<T> implements IValidator<T> {
         return this;
     }
 
-    RequiredAsync<TProperty>(musts: IRequiredAsync<TProperty, T, boolean>[]): IValidator<T> {      
-        var i = 0;
-        var promises = new Array<Promise<any>>();
-        musts.forEach(m => {
-            var promise = new Promise((resolve, reject) => {
-                var val = musts[i].predicate(this._model);
-
-                if (val == null || !musts[i].required(this._model, val))
-                {
-                    this.processErrors(musts[i].predicate, val, musts[i].message, musts[i].errorIdentifier);                 
-                }            
-                resolve();
-            });
-            promises.push(promise);
-            i++;
-        });            
-
-        Promise.all([promises]);        
-
-        return this;
-    }
-
     private getPropertyName(expression: Function): string {
         try{
             return expression(this._clonedModel)();

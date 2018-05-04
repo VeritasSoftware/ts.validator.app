@@ -6,9 +6,9 @@
 
 [**Article on framework**](https://www.c-sharpcorner.com/article/ts-validator-typescript-based-generic-validation-framework/)
 
-| Initial | After validation 1 | After validation 2 |
-| --- | --- | --- |
-| ![Login initial](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_1.jpg) | ![Login validation](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_2.jpg) | ![Login validation](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_3.jpg) |
+| Initial | After validation |
+| --- | --- |
+| ![Login initial](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_1.jpg) | ![Login validation](https://github.com/VeritasSoftware/ts.validator.app/blob/master/src/Login_2.jpg) | 
 
 *   The business rules around model validation remain centralized in the validation service.
 *   This service can be injected into any component. 
@@ -22,40 +22,11 @@ import { Validator, ValidationResult } from '../core/validate';
 
 @Injectable()
 export class ValidationService implements IValidationService {
+    
     validateUser(model: User) : ValidationResult {
         return new Validator(model)
                     .NotEmpty(m => m.Id, "Id cannot be empty")
                     .NotEmpty(m => m.Pwd, "Pwd cannot be empty")
-                    .If(m => m.Id != '' && m.Pwd != '', validator => 
-                                                validator.RequiredAsync([
-                                                                            { 
-                                                                                predicate: m => m.Id, 
-                                                                                required: (m, id) => {
-                                                                                                        var userId = id;
-                                                                                                        var pwd = m.Pwd;                                                    
-                                                                                                        //Some long running validation task
-                                                                                                        //Eg. an api call to match id, pwd in the database.
-                                                                                                        //You will return true or false from this must func
-                                                                                                        return false;
-                                                                                                    }, 
-                                                                                message: "Id and/or Password do not match our records", 
-                                                                                errorIdentifier: "Pwd.LoginFailed" 
-                                                                            },
-                                                                            { 
-                                                                                predicate: m => m.Id, 
-                                                                                required: (m, id) => {
-                                                                                                        var userId = id;                                                    
-                                                                                                        //Some long running validation task
-                                                                                                        //Eg. another api call to check if user with id not already logged in.  
-                                                                                                        //You will return true or false from this must func
-                                                                                                        return true;
-                                                                                                    }, 
-                                                                                message: "You are already logged in", 
-                                                                                errorIdentifier: "Pwd.AlreadyLoggedIn" 
-                                                                            } 
-                                                                        ])
-                                    .Exec()
-                    )                                                         
                 .Exec();
     }                           
 
@@ -89,6 +60,5 @@ export class ValidationService implements IValidationService {
 *   There are 2 models for the **components** **Login** and **Register**. These **models** are **User** and **RegisterUser**.
 *   The Validation Service creates 2 methods to validate these models. These **methods** are **validateUser** and **validateRegisterUser**.
 *   In these methods, the framework class **Validator** is used to lay the validation rules for the models.
-*   The **RequiredAsync** rule allows for an array of **long running validation tasks** to be processed in parallel.
 *   This service is injected into the components.
 *   The methods of the service are used for model validation.

@@ -6,40 +6,11 @@ import { Validator, ValidationResult } from '../core/validate';
 
 @Injectable()
 export class ValidationService implements IValidationService {
+    
     validateUser(model: User) : ValidationResult {
         return new Validator(model)
                     .NotEmpty(m => m.Id, "Id cannot be empty")
                     .NotEmpty(m => m.Pwd, "Pwd cannot be empty")
-                    .If(m => m.Id != '' && m.Pwd != '', validator => 
-                                                validator.RequiredAsync([
-                                                                            { 
-                                                                                predicate: m => m.Id, 
-                                                                                required: (m, id) => {
-                                                                                                        var userId = id;
-                                                                                                        var pwd = m.Pwd;                                                    
-                                                                                                        //Some long running validation task
-                                                                                                        //Eg. an api call to match id, pwd in the database.
-                                                                                                        //You will return true or false from this must func
-                                                                                                        return false;
-                                                                                                    }, 
-                                                                                message: "Id and/or Password do not match our records", 
-                                                                                errorIdentifier: "Pwd.LoginFailed" 
-                                                                            },
-                                                                            { 
-                                                                                predicate: m => m.Id, 
-                                                                                required: (m, id) => {
-                                                                                                        var userId = id;                                                    
-                                                                                                        //Some long running validation task
-                                                                                                        //Eg. another api call to check if user with id not already logged in.  
-                                                                                                        //You will return true or false from this must func
-                                                                                                        return true;
-                                                                                                    }, 
-                                                                                message: "You are already logged in", 
-                                                                                errorIdentifier: "Pwd.AlreadyLoggedIn" 
-                                                                            } 
-                                                                        ])
-                                    .Exec()
-                    )                                                         
                 .Exec();
     }                           
 
