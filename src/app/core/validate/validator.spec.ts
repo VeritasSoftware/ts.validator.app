@@ -67,32 +67,8 @@ describe('ValidatorTests', () => {
                                 .If(m => m.CreditCards != null && m.CreditCards.length > 0, 
                                             validator => validator
                                                                 .ForEach(m => m.CreditCards, validator => 
-                                                                                validator.CreditCard(m => m.Number, "Should not be invalid", "CreditCard.Number.Invalid")
-                                                                                         .RequiredAsync([
-                                                                                            {
-                                                                                              predicate: m => m.Number,
-                                                                                              required: (m, ccNo) => {
-                                                                                                //Some long running task to validate 
-                                                                                                //that the credit card no exists.
-                                                                                                //return true or false.
-                                                                                                return true;
-                                                                                              },
-                                                                                              message: "The credit card number does not exist",
-                                                                                              errorIdentifier: "CreditCard.Number.DoesNotExist"
-                                                                                            },
-                                                                                            {
-                                                                                              predicate: m => m.Name,
-                                                                                              required: (m, ccName) => {
-                                                                                                //Some long running task to validate 
-                                                                                                //that the credit card name does not exist in our database.
-                                                                                                //return true or false.
-                                                                                                return true;
-                                                                                              },
-                                                                                              message: "The credit card name exists in our database.",
-                                                                                              errorIdentifier: "CreditCard.Number.AlreadyExists"
-                                                                                            }
-                                                                                          ])
-                                                                              .Exec())
+                                                                                                  validator.CreditCard(m => m.Number, "Should not be invalid", "CreditCard.Number.Invalid")                                                                                         
+                                                                                            .Exec())
                                                         .Exec())                                                            
                             .Exec(); 
     
