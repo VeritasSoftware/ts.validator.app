@@ -17,9 +17,13 @@ export class ValidationService implements IValidationService {
     validateRegisterUser(model: RegisterUser) : ValidationResult {
         return new Validator(model)
                     .NotEmpty(m => m.Name, "Name cannot be empty")
-                    .NotEmpty(m => m.CreditCardNo, "Credit Card Number cannot be empty")
-                    .If(m => m.CreditCardNo != "", validator => 
-                                                                validator.CreditCard(m => +m.CreditCardNo, "Credit Card Number is invalid", "CreditCardNo.Invalid")
+                    .NotEmpty(m => m.CreditCardNo, "Credit Card Number cannot be empty")                    
+                    .If(m => m.CreditCardNo != "", validator =>
+                                                        validator.For(m => +m.CreditCardNo, creditCardValidator =>
+                                                                                                creditCardValidator.Length(13, 19, "Credit Card Number length is invalid", "CreditCardNo.Length.Invalid")
+                                                                                                                   .CreditCard("Credit Card Number is invalid", "CreditCardNo.Invalid")
+                                                                                            .Exec()
+                                                                     )                                                                
                                                     .Exec())
                     .NotEmpty(m => m.Id, "Id cannot be empty")
                     .NotEmpty(m => m.Email, "Email cannot be empty")
@@ -28,9 +32,12 @@ export class ValidationService implements IValidationService {
                                             .Exec())
                     .NotEmpty(m => m.Password, "Pwd cannot be empty")
                     .NotEmpty(m => m.ConfirmPassword, "Confirm Pwd cannot be empty") 
-                    .If(m => m.Password != "", validator => 
-                                                            validator.Required(m => m.Password, (m, pwd) => pwd.length > 3, "Password length should be greater than 3", "Password.Length.GreaterThan3") 
-                                                                     .Required(m => m.Password, (m, pwd) => pwd == m.ConfirmPassword, "Password and Confirm Password are not the same", "Password.ConfirmPassword.NotSame")
+                    .If(m => m.Password != "", validator =>
+                                                    validator.For(m => m.Password, passwordValidator => 
+                                                                                        passwordValidator.Required((m, pwd) => pwd.length > 3, "Password length should be greater than 3", "Password.Length.GreaterThan3") 
+                                                                                                         .Required((m, pwd) => pwd == m.ConfirmPassword, "Password and Confirm Password are not the same", "Password.ConfirmPassword.NotSame")
+                                                                                   .Exec()
+                                                                 )
                                                .Exec())                    
                 .Exec();
     }

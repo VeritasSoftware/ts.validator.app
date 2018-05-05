@@ -19,18 +19,25 @@ export class TypeFactory {
 function findPropertyPath(obj, path:string = null) {    
     Object.keys(obj).map(k => 
         { 
-            var o = obj[k];                 
+            try
+            {
+                var o = obj[k];                 
 
-            if (o && typeof o === "object" && ! Array.isArray(o)) {   // check for null then type object
-                findPropertyPath(o, k);
+                if (o && typeof o === "object" && ! Array.isArray(o)) {   // check for null then type object
+                    findPropertyPath(o, k);
+                }
+                else {
+                    var old = k;
+                    if (path != null)                
+                        k = path + "." + k;
+    
+                    return obj[old] = () => k;  
+                    
+                    //return obj[k] = () => k;
+                }
             }
-            else {
-                var old = k;
-                if (path != null)                
-                    k = path + "." + k;
-
-                return obj[old] = () => k;               
-            }
-            //return obj[k] = () => k;                
+            catch(ex) {
+                return "";
+            }                                    
         });
 }
