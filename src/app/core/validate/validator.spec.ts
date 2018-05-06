@@ -4,6 +4,7 @@ import { Validator } from './validator';
 
 class Employee {
     Name: string;
+    Password: string;
     CreditCards: CreditCard[];
     Super: Super;
     Email: string;
@@ -34,6 +35,7 @@ describe('ValidatorTests', () => {
   it('should have no validation errors', () => {
     var model = new Employee();
     model.Name = "John Doe";
+    model.Password = "sD4A";
 
     model.CreditCards = new Array<CreditCard>();
     var masterCard = new CreditCard();
@@ -62,14 +64,20 @@ describe('ValidatorTests', () => {
                                                                       .Exec())
                                 .If(m => m.Email != '', validator => 
                                                                     validator.Email(m => m.Email, "Should not be invalid", "Employee.Email.Invalid")
-                                                        .Exec())
+                                                        .Exec())  
                                 .Required(m => m.CreditCards, (m, creditCards) => creditCards.length > 0, "Must have atleast 1 credit card", "CreditCard.Required")
                                 .If(m => m.CreditCards != null && m.CreditCards.length > 0, 
                                             validator => validator
                                                                 .ForEach(m => m.CreditCards, validator => 
                                                                                                   validator.CreditCard(m => m.Number, "Should not be invalid", "CreditCard.Number.Invalid")                                                                                         
                                                                                             .Exec())
-                                                        .Exec())                                                            
+                                                        .Exec())
+                               .If(m => m.Password != '', validator => 
+                                                              validator.For(m => m.Password, passwordValidator =>
+                                                                                                passwordValidator.Matches("^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).*$", "Password strength is not valid")
+                                                                                                                 .Required((m, pwd) => pwd.length > 3, "Password length should be greater than 3")
+                                                                                             .Exec())
+                                                              .Exec())                                                                                                                    
                             .Exec(); 
     
     expect(validationResult.IsValid).toBeTruthy();
