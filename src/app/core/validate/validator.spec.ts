@@ -74,7 +74,7 @@ describe('ValidatorTests', () => {
                                                         .Exec())
                                .If(m => m.Password != '', validator => 
                                                               validator.For(m => m.Password, passwordValidator =>
-                                                                                                passwordValidator.Matches("^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).*$", "Password strength is not valid")
+                                                                                                passwordValidator.Matches("(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])", "Password strength is not valid")
                                                                                                                  .Required((m, pwd) => pwd.length > 3, "Password length should be greater than 3")
                                                                                              .Exec())
                                                               .Exec())                                                                                                                    
