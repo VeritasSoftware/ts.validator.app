@@ -5,6 +5,7 @@ import { Validator } from './validator';
 class Employee {
     Name: string;
     Password: string;
+    PreviousPasswords: string[];
     CreditCards: CreditCard[];
     Super: Super;
     Email: string;
@@ -35,7 +36,12 @@ describe('ValidatorTests', () => {
   it('should have no validation errors', () => {
     var model = new Employee();
     model.Name = "John Doe";
-    model.Password = "sD4AA";
+
+    model.Password = "sD4A3";
+    model.PreviousPasswords = new Array<string>()     
+    model.PreviousPasswords.push("sD4A");
+    model.PreviousPasswords.push("sD4A1");
+    model.PreviousPasswords.push("sD4A2");
 
     model.CreditCards = new Array<CreditCard>();
     var masterCard = new CreditCard();
@@ -76,6 +82,7 @@ describe('ValidatorTests', () => {
                                                               validator.For(m => m.Password, passwordValidator =>
                                                                                                 passwordValidator.Matches("(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])", "Password strength is not valid")
                                                                                                                  .Required((m, pwd) => pwd.length > 3, "Password length should be greater than 3")
+                                                                                                                 .Required((m, pwd) => !m.PreviousPasswords.some(prevPwd => prevPwd == pwd), "Password is already used")
                                                                                              .Exec())
                                                               .Exec())                                                                                                                    
                             .Exec(); 
