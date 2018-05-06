@@ -50,7 +50,7 @@ export class ValidationService implements IValidationService {
                     .NotEmpty(m => m.ConfirmPassword, "Confirm Pwd cannot be empty") 
                     .If(m => m.Password != "", validator =>
                                                     validator.For(m => m.Password, passwordValidator => 
-                                                                                        passwordValidator.Matches("^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).*$", "Password strength is not valid.")
+                                                                                        passwordValidator.Matches("^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z]).*$", "Password strength is not valid")
                                                                                                          .Required((m, pwd) => pwd.length > 3, "Password length should be greater than 3") 
                                                                                                          .Required((m, pwd) => pwd == m.ConfirmPassword, "Password and Confirm Password are not the same")
                                                                                    .Exec()
